@@ -28,4 +28,4 @@ RUN chmod +x /usr/local/bin/runcsharp.sh
 EXPOSE 7777
 
 # start listener
-ENTRYPOINT ["/usr/local/bin/server.sh"]
+# ENTRYPOINT ["/usr/local/bin/server.sh"]
