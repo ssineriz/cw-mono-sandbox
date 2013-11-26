@@ -13,13 +13,13 @@ RUN apt-get update
 RUN apt-get install -y ucspi-tcp
 
 # get server.sh
-ADD https://github.com/ssineriz/cw-mono-sandbox/blob/master/container/server.sh /usr/local/bin/server.sh
+ADD https://github.com/ssineriz/cw-mono-sandbox/raw/master/container/server.sh /usr/local/bin/server.sh
 
 # get runcsharp.sh
-ADD https://github.com/ssineriz/cw-mono-sandbox/blob/master/container/runcsharp.sh /usr/local/bin/runcsharp.sh
+ADD https://github.com/ssineriz/cw-mono-sandbox/raw/master/container/runcsharp.sh /usr/local/bin/runcsharp.sh
 
 # get ServiceStack.Text.dll
-ADD https://github.com/ssineriz/cw-mono-sandbox/blob/master/lib/ServiceStack.Text.dll /usr/local/lib/mono/4.5/ServiceStack.Text.dll
+ADD https://github.com/ssineriz/cw-mono-sandbox/raw/master/lib/ServiceStack.Text.dll /usr/local/lib/mono/4.5/ServiceStack.Text.dll
 
 # set execute permissions
 RUN chmod +x /usr/local/bin/server.sh
