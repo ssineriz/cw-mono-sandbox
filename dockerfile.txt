@@ -21,6 +21,11 @@ ADD https://github.com/ssineriz/cw-mono-sandbox/raw/master/container/runcsharp.s
 # get ServiceStack.Text.dll
 ADD https://github.com/ssineriz/cw-mono-sandbox/raw/master/lib/ServiceStack.Text.dll /usr/local/lib/mono/4.5/ServiceStack.Text.dll
 
+# get CodeWars.CSharp.TestFramework.dll
+# this is the compiled version of https://github.com/edokan/kata-test-framework-csharp (without test units and debug code)
+ADD https://github.com/ssineriz/cw-mono-sandbox/raw/master/lib/CodeWars.CSharp.TestFramework.dll /usr/local/lib/mono/4.5/CodeWars.CSharp.TestFramework.dll
+
+
 # set execute permissions
 RUN chmod +x /usr/local/bin/server.sh
 RUN chmod +x /usr/local/bin/runcsharp.sh
