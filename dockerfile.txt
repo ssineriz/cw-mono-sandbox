@@ -9,8 +9,11 @@ MAINTAINER Jacques Sineriz "ssineriz@gmail.com"
 RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
 RUN apt-get update
 
-# install ucspi-tcp fot tcpserver
+# install ucspi-tcp for tcpserver
 RUN apt-get install -y ucspi-tcp
+
+# install iptables for basic firewalling
+RUN apt-get install iptables
 
 # get server.sh
 ADD https://github.com/ssineriz/cw-mono-sandbox/raw/master/container/server.sh /usr/local/bin/server.sh
@@ -25,10 +28,15 @@ ADD https://github.com/ssineriz/cw-mono-sandbox/raw/master/lib/ServiceStack.Text
 # this is the compiled version of https://github.com/edokan/kata-test-framework-csharp (without test units and debug code)
 ADD https://github.com/ssineriz/cw-mono-sandbox/raw/master/lib/CodeWars.CSharp.TestFramework.dll /usr/local/lib/mono/4.5/CodeWars.CSharp.TestFramework.dll
 
-
 # set execute permissions
 RUN chmod +x /usr/local/bin/server.sh
 RUN chmod +x /usr/local/bin/runcsharp.sh
+
+# set file system permissions
+RUN chmod r-o /* /.*
+
+# turn off outgoing network traffic
+RUN iptables -A OUTPUT -m owner --uid-owner 65534 -j DROP
 
 EXPOSE 7777
 

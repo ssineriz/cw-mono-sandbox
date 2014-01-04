@@ -1,13 +1,23 @@
 #!/bin/bash
 TMP_ERR=$(/bin/mktemp)
 TMP_OUT=$(/bin/mktemp)
-/usr/bin/timeout -k 4s 3s /usr/local/bin/csharp 2> "$TMP_ERR" > "$TMP_OUT"
+TMP_IN=$(/bin/mktemp)
+cat > "$TMP_IN"
+chmod o+r "$TMP_IN"
+/usr/bin/timeout -k 4s 3s su nobody /usr/local/bin/csharp "$TMP_IN" 2> "$TMP_ERR" > "$TMP_OUT"
 if   [ $? -eq 124 ] 
 then
 	# timeout
-	err="Code Timeout"
-	out=""
-	timeout="true"
+	if [ -s "$TMP_ERR" ]
+	then
+		err=$(cat "$TMP_ERR" | sed -e 's/\"/\\\"/g')
+		out=""
+		timeout="false"
+	else
+		err="Code Timeout"
+		out=""
+		timeout="true"
+	fi
 else
 	err=$(cat "$TMP_ERR" | sed -e 's/\"/\\\"/g')
 	out=$(cat "$TMP_OUT" | sed -e 's/\"/\\\"/g')
@@ -15,4 +25,5 @@ else
 fi
 rm "$TMP_ERR"
 rm "$TMP_OUT"
+rm "$TMP_IN"
 echo "{\"out\":\"${out}\", \"err\":\"${err}\", \"timeout\":${timeout}}"
