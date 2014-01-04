@@ -39,7 +39,7 @@ ADD https://github.com/ssineriz/cw-mono-sandbox/raw/master/lib/ServiceStack.Text
 ADD https://github.com/ssineriz/cw-mono-sandbox/raw/master/lib/CodeWars.CSharp.TestFramework.dll /usr/local/lib/mono/4.5/CodeWars.CSharp.TestFramework.dll
 
 # all in one script to tackle the 42 layers limit
-ADD https://github.com/ssineriz/cw-mono-sandbox/raw/master/container/prepare.sh > /usr/local/bin/prepare.sh
+ADD https://github.com/ssineriz/cw-mono-sandbox/raw/master/container/prepare.sh /usr/local/bin/prepare.sh
 RUN chmod +x /usr/local/bin/prepare.sh && /usr/local/bin/prepare.sh || return 0 
 
 EXPOSE 7777
