@@ -33,7 +33,7 @@ RUN chmod +x /usr/local/bin/server.sh
 RUN chmod +x /usr/local/bin/runcsharp.sh
 
 # set file system permissions
-RUN chmod -f o-r /* /.*
+RUN chmod -f o-r /* /.* || return 0
 RUN chmod -f o-w /tmp
 
 # turn off outgoing network traffic for nobody
