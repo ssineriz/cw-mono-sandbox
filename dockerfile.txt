@@ -13,9 +13,7 @@ RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt
 
 # install ucspi-tcp for tcpserver and iptables for basic firewalling
 
-RUN apt-get install -y ucspi-tcp
-
- && apt-get install -y iptables
+RUN apt-get install -y ucspi-tcp && apt-get install -y iptables
 
 # get server.sh
 
