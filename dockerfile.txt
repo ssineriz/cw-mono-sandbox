@@ -1,6 +1,6 @@
-# Mono sandbox adapted to CodeWars
+# Mono sandbox adapted for CodeWars
 #
-# VERSION               0.0.1
+# VERSION               0.0.2
 
 FROM      rwentzel/ubuntu-mono
 MAINTAINER Jacques Sineriz "ssineriz@gmail.com"
@@ -13,7 +13,7 @@ RUN apt-get update
 RUN apt-get install -y ucspi-tcp
 
 # install iptables for basic firewalling
-RUN apt-get install iptables
+RUN apt-get install -y iptables
 
 # get server.sh
 ADD https://github.com/ssineriz/cw-mono-sandbox/raw/master/container/server.sh /usr/local/bin/server.sh
@@ -33,10 +33,16 @@ RUN chmod +x /usr/local/bin/server.sh
 RUN chmod +x /usr/local/bin/runcsharp.sh
 
 # set file system permissions
-RUN chmod r-o /* /.*
+RUN chmod o-r /* /.*
+RUN chmod o-w /tmp
 
-# turn off outgoing network traffic
+# turn off outgoing network traffic for nobody
 RUN iptables -A OUTPUT -m owner --uid-owner 65534 -j DROP
+
+# prepare home settings for nobody. Files in /.config/csharp will be loaded (or executed) before script
+RUN usermod -d /home/nobody -m nobody
+RUN mkdir -p /home/nobody/.config/csharp
+RUN cp /usr/local/lib/mono/4.5/CodeWars.CSharp.TestFramework.dll /home/nobody/.config/csharp/
 
 EXPOSE 7777
 
