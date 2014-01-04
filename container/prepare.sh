@@ -11,17 +11,17 @@ apt-get install -y ucspi-tcp
 apt-get install -y iptables
 
 # get server.sh
-wget -O /usr/local/bin/server.sh https://github.com/ssineriz/cw-mono-sandbox/raw/master/container/server.sh
+nc https://github.com/ssineriz/cw-mono-sandbox/raw/master/container/server.sh > /usr/local/bin/server.sh
 
 # get runcsharp.sh
-wget -O /usr/local/bin/runcsharp.sh https://github.com/ssineriz/cw-mono-sandbox/raw/master/container/runcsharp.sh
+nc https://github.com/ssineriz/cw-mono-sandbox/raw/master/container/runcsharp.sh > /usr/local/bin/runcsharp.sh
 
 # get ServiceStack.Text.dll
-wget -O /usr/local/lib/mono/4.5/ServiceStack.Text.dll https://github.com/ssineriz/cw-mono-sandbox/raw/master/lib/ServiceStack.Text.dll
+nc https://github.com/ssineriz/cw-mono-sandbox/raw/master/lib/ServiceStack.Text.dll > /usr/local/lib/mono/4.5/ServiceStack.Text.dll
 
 # get CodeWars.CSharp.TestFramework.dll
 # this is the compiled version of https://github.com/edokan/kata-test-framework-csharp (without test units and debug code)
-wget -O /usr/local/lib/mono/4.5/CodeWars.CSharp.TestFramework.dll https://github.com/ssineriz/cw-mono-sandbox/raw/master/lib/CodeWars.CSharp.TestFramework.dll
+nc https://github.com/ssineriz/cw-mono-sandbox/raw/master/lib/CodeWars.CSharp.TestFramework.dll > /usr/local/lib/mono/4.5/CodeWars.CSharp.TestFramework.dll
 
 # set execute permissions
 chmod +x /usr/local/bin/server.sh

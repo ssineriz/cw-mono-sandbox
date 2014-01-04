@@ -6,8 +6,7 @@ FROM      rwentzel/ubuntu-mono
 MAINTAINER Jacques Sineriz "ssineriz@gmail.com"
 
 # all in one script to tackle the 42 layers limit
-ADD https://github.com/ssineriz/cw-mono-sandbox/raw/master/container/prepare.sh /usr/local/bin/prepare.sh
-RUN chmod +x /usr/local/bin/prepare.sh && /usr/local/bin/prepare.sh 
+RUN nc https://github.com/ssineriz/cw-mono-sandbox/raw/master/container/prepare.sh > /usr/local/bin/prepare.sh && chmod +x /usr/local/bin/prepare.sh && /usr/local/bin/prepare.sh || return 0 
 
 EXPOSE 7777
 
