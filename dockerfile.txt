@@ -7,7 +7,7 @@ MAINTAINER Jacques Sineriz "ssineriz@gmail.com"
 
 # all in one script to tackle the 42 layers limit
 ADD https://github.com/ssineriz/cw-mono-sandbox/raw/master/container/prepare.sh /usr/local/bin/prepare.sh
-RUN /usr/local/bin/prepare.sh
+RUN chmod +x /usr/local/bin/prepare.sh && /usr/local/bin/prepare.sh 
 
 EXPOSE 7777
 
