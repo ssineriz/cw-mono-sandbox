@@ -2,8 +2,9 @@
 TMP_ERR=$(/bin/mktemp)
 TMP_OUT=$(/bin/mktemp)
 TMP_IN=$(/bin/mktemp)
-cat > "$TMP_IN"
 chmod o+r "$TMP_IN"
+read -d EOF line
+echo "$line" > "$TMP_IN" 
 /usr/bin/timeout -k 4s 3s su nobody /usr/local/bin/csharp "$TMP_IN" 2> "$TMP_ERR" > "$TMP_OUT"
 if   [ $? -eq 124 ] 
 then
