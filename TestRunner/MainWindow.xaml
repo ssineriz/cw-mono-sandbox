@@ -11,9 +11,9 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0">
             <Label Content="Server"/>
-            <TextBox Name="server" Width="100"/>
-            <Label Content="Port"/>
-            <TextBox Name="port" Width="50"/>
+            <TextBox Name="server" Width="100" Text="127.0.0.1"/>
+            <Label Content="Port" />
+            <TextBox Name="port" Width="50" Text="49155"/>
         </StackPanel>
         <TextBox Grid.Row="1" Name="code" AcceptsReturn="True" AcceptsTab="True" IsEnabled="True" IsReadOnly="False" />
         <Button Grid.Row="2" Width="200" Content="Send" Click="Button_Click"/>

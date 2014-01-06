@@ -29,23 +29,11 @@ namespace TestRunner
         {
             try
             {
-                System.Net.Sockets.TcpClient cli = new System.Net.Sockets.TcpClient(server.Text, int.Parse(port.Text));
-                var buf = System.Text.UTF8Encoding.UTF8.GetBytes(code.Text + "\n");
-                var ns = cli.GetStream();
-                ns.Write(buf, 0, buf.Length);
-
-
-                var ms = new System.IO.MemoryStream();
-                buf = new byte[1024];
-                int len = 0;
-                for (int i = 0; ((i = ns.Read(buf, 0, 1024)) > 0); )
-                {
-                    ms.Write(buf, 0, i);
-                    len += i;
-                }
-                ns.Close();
                 resp.Foreground = SystemColors.WindowTextBrush;
-                resp.Text = System.Text.UTF8Encoding.UTF8.GetString(ms.GetBuffer(), 0, len);
+                resp.Text = "";
+                var client = new System.Net.WebClient();                
+                var buf = client.UploadData(string.Format("http://{0}:{1}/", server.Text, port.Text), "POST", System.Text.UTF8Encoding.UTF8.GetBytes(code.Text));
+                resp.Text = System.Text.UTF8Encoding.UTF8.GetString(buf, 0, buf.Length);
             }
             catch (Exception ex)
             {
