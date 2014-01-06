@@ -1,7 +1,7 @@
 # used to tackle the 42 layers limit in docker 
 
 # set execute permissions
-chmod +x /usr/local/bin/server.sh
+chmod +x /usr/local/bin/createtemp.sh
 chmod +x /usr/local/bin/runcsharp.sh
 
 # set file system permissions

@@ -13,11 +13,15 @@ RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt
 
 # install ucspi-tcp for tcpserver and iptables for basic firewalling
 
-RUN apt-get install -y ucspi-tcp && apt-get install -y iptables
+RUN apt-get install -y iptables
 
-# get server.sh
+# get createtemp.sh
 
-ADD https://github.com/ssineriz/cw-mono-sandbox/raw/master/container/server.sh /usr/local/bin/server.sh
+ADD https://github.com/ssineriz/cw-mono-sandbox/raw/master/container/createtemp.sh /usr/local/bin/createtemp.sh
+
+# get server.py
+
+ADD https://github.com/ssineriz/cw-mono-sandbox/raw/master/container/server.py /usr/local/bin/server.py
 
 # get runcsharp.sh
 
@@ -43,4 +47,4 @@ RUN chmod +x /usr/local/bin/prepare.sh && /usr/local/bin/prepare.sh || return 0
 EXPOSE 7777
 
 # start listener
-ENTRYPOINT ["/usr/local/bin/server.sh"]
+ENTRYPOINT ["/usr/bin/python", "/usr/local/bin/server.py"]
