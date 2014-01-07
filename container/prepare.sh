@@ -7,6 +7,10 @@ chmod +x /usr/local/bin/runcsharp.sh
 # set file system permissions
 chmod -f o-r /* /.*
 chmod -f o-w /tmp
+chmod o-x /usr/local/bin/*
+chmod o-x /usr/bin/*
+chmod o-x /usr/sbin/*
+chmod o+x /usr/local/bin/mono
 
 # turn off outgoing network traffic for nobody
 iptables -A OUTPUT -m owner --uid-owner 65534 -j DROP
