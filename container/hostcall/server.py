@@ -1,5 +1,8 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
+from SocketServer import ThreadingMixIn
 from subprocess import Popen, PIPE
+class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
+	pass
 class WHandler(BaseHTTPRequestHandler):
 	def do_POST(self):
 		length = self.headers['content-length']
@@ -15,5 +18,5 @@ class WHandler(BaseHTTPRequestHandler):
 		self.send_header('Content-type', 'text/json')
 		self.end_headers()
 		self.wfile.write(p.stdout.read().encode())
-server = HTTPServer(('', 49150), WHandler)
+server = ThreadedHTTPServer(('', 49150), WHandler)
 server.serve_forever()
