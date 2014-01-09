@@ -13,7 +13,7 @@ else
 	out=$(cat "$TMP_OUT" | sed -e 's/\"/\\\"/g')
 	timeout="false"
 fi
-code=$(cat "$TMP_IN" | sed -e 's/\"/\\\"/g')
+# code=$(cat "$1" | sed -e 's/\"/\\\"/g')
 rm "$TMP_ERR"
 rm "$TMP_OUT"
 rm "$1"
